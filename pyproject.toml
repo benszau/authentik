@@ -177,6 +177,7 @@ wsproto = "*"
 xmlsec = "*"
 zxcvbn = "*"
 jsonpatch = "*"
+firebase-admin = "*"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"
