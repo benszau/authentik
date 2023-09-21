@@ -30423,6 +30423,10 @@ components:
         friendly_name:
           type: string
           nullable: true
+        firebase_config:
+          type: object
+          additionalProperties: {}
+          description: temp
       required:
       - component
       - meta_model_name
@@ -30451,6 +30455,10 @@ components:
           type: string
           nullable: true
           minLength: 1
+        firebase_config:
+          type: object
+          additionalProperties: {}
+          description: temp
       required:
       - name
     AuthenticatorSMSChallenge:
@@ -38206,6 +38214,10 @@ components:
           type: string
           nullable: true
           minLength: 1
+        firebase_config:
+          type: object
+          additionalProperties: {}
+          description: temp
     PatchedAuthenticatorSMSStageRequest:
       type: object
       description: AuthenticatorSMSStage Serializer
