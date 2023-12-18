@@ -31894,7 +31894,7 @@ components:
           description: Return internal model name
           readOnly: true
         pk:
-          type: integer
+          type: string
         name:
           type: string
         type:
@@ -31903,6 +31903,7 @@ components:
           readOnly: true
         confirmed:
           type: boolean
+          readOnly: true
       required:
       - confirmed
       - meta_model_name
@@ -32228,17 +32229,37 @@ components:
       type: object
       description: Serializer for Duo authenticator devices
       properties:
-        pk:
-          type: integer
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
           readOnly: true
-          title: ID
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
+        pk:
+          type: string
         name:
           type: string
-          description: The human-readable name of this device.
-          maxLength: 64
+        type:
+          type: string
+          description: Get type of device
+          readOnly: true
+        confirmed:
+          type: boolean
+          readOnly: true
       required:
+      - confirmed
+      - meta_model_name
       - name
       - pk
+      - type
+      - verbose_name
+      - verbose_name_plural
     DuoDeviceEnrollmentStatus:
       type: object
       properties:
@@ -32250,13 +32271,15 @@ components:
       type: object
       description: Serializer for Duo authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
       required:
       - name
+      - pk
     DuoResponseEnum:
       enum:
       - success
@@ -35301,24 +35324,42 @@ components:
       type: object
       description: Serializer for Mobile authenticator devices
       properties:
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
+          readOnly: true
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
         pk:
           type: string
-          format: uuid
-          title: Uuid
         name:
           type: string
-          description: The human-readable name of this device.
-          maxLength: 64
-        state:
-          type: object
-          additionalProperties: {}
+        type:
+          type: string
+          description: Get type of device
+          readOnly: true
+        confirmed:
+          type: boolean
+          readOnly: true
         last_checkin:
           allOf:
           - $ref: '#/components/schemas/MobileDeviceInfo'
           readOnly: true
       required:
+      - confirmed
       - last_checkin
+      - meta_model_name
       - name
+      - pk
+      - type
+      - verbose_name
+      - verbose_name_plural
     MobileDeviceEnrollmentCallback:
       type: object
       properties:
@@ -35411,18 +35452,13 @@ components:
       properties:
         pk:
           type: string
-          format: uuid
-          title: Uuid
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
-        state:
-          type: object
-          additionalProperties: {}
       required:
       - name
+      - pk
     MobileDeviceResponseRequest:
       type: object
       description: Response from push sent to phone
@@ -38518,11 +38554,12 @@ components:
       type: object
       description: Serializer for Duo authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
     PatchedEmailStageRequest:
       type: object
       description: EmailStage Serializer
@@ -39278,16 +39315,10 @@ components:
       properties:
         pk:
           type: string
-          format: uuid
-          title: Uuid
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
-        state:
-          type: object
-          additionalProperties: {}
     PatchedNotificationRequest:
       type: object
       description: Notification Serializer
@@ -40321,11 +40352,12 @@ components:
       type: object
       description: Serializer for sms authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
     PatchedScopeMappingRequest:
       type: object
       description: ScopeMapping Serializer
@@ -40357,20 +40389,22 @@ components:
       type: object
       description: Serializer for static authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
     PatchedTOTPDeviceRequest:
       type: object
       description: Serializer for totp authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
     PatchedTenantRequest:
       type: object
       description: Tenant Serializer
@@ -40611,10 +40645,12 @@ components:
       type: object
       description: Serializer for WebAuthn authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          maxLength: 200
     Permission:
       type: object
       description: Global permission
@@ -43299,32 +43335,50 @@ components:
       type: object
       description: Serializer for sms authenticator devices
       properties:
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
+          readOnly: true
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
+        pk:
+          type: string
         name:
           type: string
-          description: The human-readable name of this device.
-          maxLength: 64
-        pk:
-          type: integer
-          readOnly: true
-          title: ID
-        phone_number:
+        type:
           type: string
+          description: Get type of device
+          readOnly: true
+        confirmed:
+          type: boolean
           readOnly: true
       required:
+      - confirmed
+      - meta_model_name
       - name
-      - phone_number
       - pk
+      - type
+      - verbose_name
+      - verbose_name_plural
     SMSDeviceRequest:
       type: object
       description: Serializer for sms authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
       required:
       - name
+      - pk
     ScopeMapping:
       type: object
       description: ScopeMapping Serializer
@@ -43822,34 +43876,56 @@ components:
       type: object
       description: Serializer for static authenticator devices
       properties:
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
+          readOnly: true
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
+        pk:
+          type: string
         name:
           type: string
-          description: The human-readable name of this device.
-          maxLength: 64
+        type:
+          type: string
+          description: Get type of device
+          readOnly: true
+        confirmed:
+          type: boolean
+          readOnly: true
         token_set:
           type: array
           items:
             $ref: '#/components/schemas/StaticDeviceToken'
           readOnly: true
-        pk:
-          type: integer
-          readOnly: true
-          title: ID
       required:
+      - confirmed
+      - meta_model_name
       - name
       - pk
       - token_set
+      - type
+      - verbose_name
+      - verbose_name_plural
     StaticDeviceRequest:
       type: object
       description: Serializer for static authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
       required:
       - name
+      - pk
     StaticDeviceToken:
       type: object
       description: Serializer for static device's tokens
@@ -43952,28 +44028,50 @@ components:
       type: object
       description: Serializer for totp authenticator devices
       properties:
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
+          readOnly: true
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
+        pk:
+          type: string
         name:
           type: string
-          description: The human-readable name of this device.
-          maxLength: 64
-        pk:
-          type: integer
+        type:
+          type: string
+          description: Get type of device
           readOnly: true
-          title: ID
+        confirmed:
+          type: boolean
+          readOnly: true
       required:
+      - confirmed
+      - meta_model_name
       - name
       - pk
+      - type
+      - verbose_name
+      - verbose_name_plural
     TOTPDeviceRequest:
       type: object
       description: Serializer for totp authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          description: The human-readable name of this device.
-          maxLength: 64
       required:
       - name
+      - pk
     Task:
       type: object
       description: Serialize TaskInfo and TaskResult
@@ -45308,31 +45406,50 @@ components:
       type: object
       description: Serializer for WebAuthn authenticator devices
       properties:
-        pk:
-          type: integer
+        verbose_name:
+          type: string
+          description: Return object's verbose_name
           readOnly: true
-          title: ID
+        verbose_name_plural:
+          type: string
+          description: Return object's plural verbose_name
+          readOnly: true
+        meta_model_name:
+          type: string
+          description: Return internal model name
+          readOnly: true
+        pk:
+          type: string
         name:
           type: string
-          maxLength: 200
-        created_on:
+        type:
           type: string
-          format: date-time
+          description: Get type of device
+          readOnly: true
+        confirmed:
+          type: boolean
           readOnly: true
       required:
-      - created_on
+      - confirmed
+      - meta_model_name
       - name
       - pk
+      - type
+      - verbose_name
+      - verbose_name_plural
     WebAuthnDeviceRequest:
       type: object
       description: Serializer for WebAuthn authenticator devices
       properties:
+        pk:
+          type: string
+          minLength: 1
         name:
           type: string
           minLength: 1
-          maxLength: 200
       required:
       - name
+      - pk
     Workers:
       type: object
       properties:
